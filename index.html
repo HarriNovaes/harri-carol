@@ -1,33 +1,556 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#7f3450"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="icon-192.png"><title>Harri & Carol ❤️</title><style>
-:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#452d39;background:#fff9f7}*{box-sizing:border-box}body{margin:0}button,input,textarea,select{font:inherit}button{cursor:pointer}.app{max-width:600px;margin:auto;min-height:100dvh;padding:22px 18px 105px}.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px}.brand{font-family:Georgia,serif;font-size:26px;color:#813a54;font-weight:bold}.tag{font-size:12px;color:#9a6b7b}.hero{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 12px 35px #8a4a5b25}.hero img{display:block;width:100%;height:auto;object-fit:contain;object-position:center;background:#452d39}.hero:after{content:'';pointer-events:none;position:absolute;inset:65% 0 0;background:linear-gradient(transparent,#25161dbd)}.heroText{position:absolute;z-index:1;bottom:18px;left:19px;right:15px;color:white;text-shadow:0 1px 5px #25161d88}.heroText h1{font:clamp(19px,5vw,28px) Georgia,serif;margin:4px 0}.heroText p{margin:0;font-size:13px}.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}.stat,.panel,.tile{background:white;border:1px solid #f3dfe5;border-radius:18px;padding:15px;box-shadow:0 5px 18px #7b39500a}.stat strong{display:block;color:#843c57;font-size:21px}.stat small{color:#8d7880}.heading{font:23px Georgia,serif;margin:24px 0 12px}.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}.tile{text-align:left;min-height:92px;color:#613b4c}.tile span{font-size:26px;display:block;margin-bottom:7px}.tile b{font-size:14px}.nav{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#fffdfcf2;border-top:1px solid #f1dce3;display:flex;justify-content:space-around;padding:11px 4px calc(11px + env(safe-area-inset-bottom));backdrop-filter:blur(12px)}.nav button{border:0;background:transparent;color:#90727e;font-size:11px;display:flex;flex-direction:column;gap:3px;align-items:center}.nav button span{font-size:22px}.nav button.active{color:#813a54;font-weight:700}.hidden{display:none}.sectionTitle{font:27px Georgia,serif;color:#7f3450;margin:10px 0}.muted{color:#917c85;font-size:13px;line-height:1.5}.panel{margin:12px 0}.field{width:100%;border:1px solid #e7ccd5;border-radius:12px;padding:12px;background:#fff;margin:6px 0 10px;color:#452d39}.primary{border:0;border-radius:12px;background:#823b55;color:#fff;padding:12px 18px;font-weight:650}.secondary{border:1px solid #e9cad5;border-radius:10px;background:#fff;color:#823b55;padding:8px 10px}.entry{border-bottom:1px solid #f2e2e7;padding:12px 0;overflow-wrap:anywhere}.entry:last-child{border-bottom:0}.entry small{color:#977b86}.entry p{white-space:pre-wrap}.empty{padding:16px;color:#917c85;text-align:center}.month{font-weight:700;color:#803b55}.pill{background:#f9e8ee;border-radius:50px;padding:6px 11px;font-size:12px;color:#7e3b55;display:inline-block}.footer{text-align:center;font-size:11px;color:#a28c96;margin:28px 0}.notice{background:#fff1e5;border:1px solid #f4ddc8;padding:12px;border-radius:12px;font-size:12px;line-height:1.5;color:#785544}input[type=file]{font-size:13px}img.memory{width:100%;max-height:280px;object-fit:contain;border-radius:12px;background:#f8eef1;margin-top:8px}
 
-.auth{max-width:420px;margin:65px auto 0}.auth h1{font:32px Georgia,serif;color:#813a54}.auth label{display:block;font-size:13px;margin-top:12px}.error{color:#a32248;font-size:13px}.who{font-size:12px;color:#876271}.logout{border:0;background:transparent;color:#813a54;text-decoration:underline;font-size:12px}.loading{text-align:center;padding:80px 12px;color:#813a54}.hero{height:auto;min-height:0;background:#452d39}.hero img{display:block;width:100%;height:auto;object-fit:contain;object-position:center}.hero:after{pointer-events:none}.heroText{bottom:15px}.heroText h1{font-size:clamp(20px,5vw,28px)}
-</style></head><body><main class="app"><div id="loading" class="loading">Preparando nosso cantinho... ♡</div><section id="auth" class="auth hidden"><h1>Harri & Carol ♡</h1><p class="muted">Nosso pequeno universo, só para nós dois.</p><form id="loginForm"><label>E-mail</label><input class="field" type="email" name="email" autocomplete="username" required><label>Senha</label><input class="field" type="password" name="password" autocomplete="current-password" required><button class="primary" type="submit">Entrar ♡</button><p class="error" id="loginError" role="alert"></p></form></section><div id="appContent" class="hidden"><div class="top"><div><div class="brand">Harri <span style="color:#d79cae">&</span> Carol ♡</div><div class="tag">Nosso pequeno universo</div></div><div><span style="font-size:27px">💗</span><div class="who" id="who"></div><button class="logout" id="logoutBtn">Sair</button></div></div><section id="home"><div class="hero"><img src="familia.jpg" alt="Foto da família"><div class="heroText"><div>O nosso amor, a nossa história</div><h1>Nós três, para sempre ♡</h1><p>Desde 19 de janeiro de 2020</p></div></div><div class="stats"><div class="stat"><strong id="together">—</strong><small>dias de história juntos</small></div><div class="stat"><strong id="luaAge">—</strong><small>meses da nossa Lua 🌙</small></div></div><h2 class="heading">Nosso cantinho</h2><div class="tiles" id="tiles"></div><div class="footer">Feito com amor, para nossa família ♡</div></section><section id="detail" class="hidden"><button class="secondary" onclick="go('home')">← Início</button><h1 class="sectionTitle" id="detailTitle"></h1><p class="muted" id="detailDesc"></p><div id="detailBody"></div></section></div></main><nav class="nav hidden" id="bottomNav"><button data-nav="home" onclick="go('home')" class="active"><span>⌂</span>Início</button><button data-nav="agenda" onclick="go('agenda')"><span>▦</span>Agenda</button><button data-nav="lua" onclick="go('lua')"><span>☾</span>Lua</button><button data-nav="cartas" onclick="go('cartas')"><span>♡</span>Cartas</button><button data-nav="financas" onclick="go('financas')"><span>◈</span>Finanças</button></nav><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script><script>
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#7f3450">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Harri & Carol ❤️</title>
+<style>
+:root{font-family:system-ui,-apple-system,Segoe UI,sans-serif;color:#452d39;background:#fff9f7}
+*{box-sizing:border-box}
+body{margin:0}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+.app{max-width:600px;margin:auto;min-height:100dvh;padding:22px 18px 105px}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:17px;gap:12px}
+.brand{font-family:Georgia,serif;font-size:26px;color:#813a54;font-weight:bold}
+.tag{font-size:12px;color:#9a6b7b}
+.hero{position:relative;border-radius:24px;overflow:hidden;box-shadow:0 12px 35px #8a4a5b25;background:#452d39}
+.hero img{display:block;width:100%;height:auto;object-fit:contain;object-position:center}
+.hero:after{content:'';pointer-events:none;position:absolute;inset:65% 0 0;background:linear-gradient(transparent,#25161dbd)}
+.heroText{position:absolute;z-index:1;bottom:15px;left:19px;right:15px;color:white;text-shadow:0 1px 5px #25161d88}
+.heroText h1{font:clamp(20px,5vw,28px) Georgia,serif;margin:4px 0}
+.heroText p{margin:0;font-size:13px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+.stat,.panel,.tile{background:white;border:1px solid #f3dfe5;border-radius:18px;padding:15px;box-shadow:0 5px 18px #7b39500a}
+.stat strong{display:block;color:#843c57;font-size:21px}
+.stat small{color:#8d7880}
+.heading{font:23px Georgia,serif;margin:24px 0 12px}
+.tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:11px}
+.tile{text-align:left;min-height:92px;color:#613b4c}
+.tile span{font-size:26px;display:block;margin-bottom:7px}
+.tile b{font-size:14px}
+.nav{position:fixed;z-index:10;bottom:0;left:0;right:0;background:#fffdfcf2;border-top:1px solid #f1dce3;display:flex;justify-content:space-around;padding:11px 4px calc(11px + env(safe-area-inset-bottom));backdrop-filter:blur(12px)}
+.nav button{border:0;background:transparent;color:#90727e;font-size:11px;display:flex;flex-direction:column;gap:3px;align-items:center}
+.nav button span{font-size:22px}
+.nav button.active{color:#813a54;font-weight:700}
+.hidden{display:none!important}
+.sectionTitle{font:27px Georgia,serif;color:#7f3450;margin:10px 0}
+.muted{color:#917c85;font-size:13px;line-height:1.5}
+.panel{margin:12px 0}
+.field{width:100%;border:1px solid #e7ccd5;border-radius:12px;padding:12px;background:#fff;margin:6px 0 10px;color:#452d39}
+.primary{border:0;border-radius:12px;background:#823b55;color:#fff;padding:12px 18px;font-weight:650}
+.primary:disabled{opacity:.55}
+.secondary{border:1px solid #e9cad5;border-radius:10px;background:#fff;color:#823b55;padding:8px 10px}
+.entry{border-bottom:1px solid #f2e2e7;padding:12px 0;overflow-wrap:anywhere}
+.entry:last-child{border-bottom:0}
+.entry small{color:#977b86}
+.entry p{white-space:pre-wrap}
+.empty{padding:16px;color:#917c85;text-align:center}
+.pill{background:#f9e8ee;border-radius:50px;padding:6px 11px;font-size:12px;color:#7e3b55;display:inline-block}
+.footer{text-align:center;font-size:11px;color:#a28c96;margin:28px 0}
+.notice{background:#fff1e5;border:1px solid #f4ddc8;padding:12px;border-radius:12px;font-size:12px;line-height:1.5;color:#785544}
+.auth{max-width:420px;margin:65px auto 0}
+.auth h1{font:32px Georgia,serif;color:#813a54}
+.auth label{display:block;font-size:13px;margin-top:12px}
+.error{color:#a32248;font-size:13px}
+.who{font-size:12px;color:#876271;text-align:right}
+.logout{border:0;background:transparent;color:#813a54;text-decoration:underline;font-size:12px}
+.loading{text-align:center;padding:80px 12px;color:#813a54}
+.author{display:flex;align-items:center;gap:7px;margin:8px 0;color:#85566b;font-size:12px}
+.avatar{display:inline-grid;place-items:center;width:25px;height:25px;border-radius:50%;background:#f5dce5;color:#813a54;font-weight:700}
+.activity{display:flex;gap:10px;align-items:flex-start}
+.activityIcon{width:37px;height:37px;border-radius:12px;background:#f9e8ee;display:grid;place-items:center;flex-shrink:0}
+.topActions{display:flex;align-items:center;gap:8px}
+.bell{border:1px solid #f1dce3;background:#fff;border-radius:50%;width:39px;height:39px;font-size:19px}
+.sectionActions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+@media(max-width:370px){.brand{font-size:22px}.app{padding-left:13px;padding-right:13px}}
+</style>
+</head>
+<body>
+<main class="app">
+<div id="loading" class="loading">Preparando nosso cantinho... ♡</div>
+
+<section id="auth" class="auth hidden">
+<h1>Harri & Carol ♡</h1>
+<p class="muted">Nosso pequeno universo, só para nós dois.</p>
+<form id="loginForm">
+<label>E-mail</label>
+<input class="field" type="email" name="email" autocomplete="username" required>
+<label>Senha</label>
+<input class="field" type="password" name="password" autocomplete="current-password" required>
+<button class="primary" type="submit">Entrar ♡</button>
+<p class="error" id="loginError" role="alert"></p>
+</form>
+</section>
+
+<div id="appContent" class="hidden">
+<div class="top">
+<div>
+<div class="brand">Harri <span style="color:#d79cae">&</span> Carol ♡</div>
+<div class="tag">Nosso pequeno universo</div>
+</div>
+<div class="topActions">
+<button class="bell" id="bellBtn" title="Atividades recentes" aria-label="Atividades recentes">🔔</button>
+<div>
+<div class="who" id="who"></div>
+<button class="logout" id="logoutBtn">Sair</button>
+</div>
+</div>
+</div>
+
+<section id="home">
+<div class="hero">
+<img src="familia.jpg" alt="Foto da família">
+<div class="heroText">
+<div>O nosso amor, a nossa história</div>
+<h1>Nós três, para sempre ♡</h1>
+<p>Desde 9 de janeiro de 2020</p>
+</div>
+</div>
+<div class="stats">
+<div class="stat"><strong id="together">—</strong><small>dias de história juntos</small></div>
+<div class="stat"><strong id="luaAge">—</strong><small>meses da nossa Lua 🌙</small></div>
+</div>
+<h2 class="heading">Nosso cantinho</h2>
+<div class="tiles" id="tiles"></div>
+<div class="footer">Feito com amor, para nossa família ♡</div>
+</section>
+
+<section id="detail" class="hidden">
+<button class="secondary" id="backBtn">← Início</button>
+<h1 class="sectionTitle" id="detailTitle"></h1>
+<p class="muted" id="detailDesc"></p>
+<div id="detailBody"></div>
+</section>
+</div>
+</main>
+
+<nav class="nav hidden" id="bottomNav">
+<button data-nav="home" class="active"><span>⌂</span>Início</button>
+<button data-nav="agenda"><span>▦</span>Agenda</button>
+<button data-nav="lua"><span>☾</span>Lua</button>
+<button data-nav="cartas"><span>♡</span>Cartas</button>
+<button data-nav="financas"><span>◈</span>Finanças</button>
+</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+<script>
 const PROJECT_URL='https://wnicygkreefzjxwrbyby.supabase.co';
 const PUBLISHABLE_KEY='sb_publishable_3mV3116NClDboJPvSKKH-w_8VUYrQSn';
 const client=window.supabase?.createClient(PROJECT_URL,PUBLISHABLE_KEY);
-const pages=[['agenda','📅','Nossa agenda','Compromissos, consultas e datas importantes.'],['financas','💰','Nossas finanças','Registrem entradas e despesas da casa.'],['compras','🛒','Lista de compras','Tudo que precisamos comprar.'],['tarefas','🏠','Tarefas da casa','Organizem o dia a dia juntos.'],['lua','🌙','Cantinho da Lua','Memórias, fotos e mêsversários da nossa filha.'],['fotos','📸','Recordações','Momentos especiais da nossa história.'],['metas','✨','Metas e sonhos','Planos para o nosso futuro.'],['cartas','💌','Cartas e mensagens','Palavras para guardar com carinho.'],['saude','🩺','Saúde e consultas','Lembretes de cuidados e consultas.'],['passeios','🌷','Passeios e lazer','Ideias para viver momentos juntos.']];
+
+const USERS={
+  '091b61f8-a28d-460b-bd47-29a6310b1992':'Harri',
+  '51c425f0-8ec5-457a-92c6-6425561135fd':'Carol'
+};
+
+const pages=[
+['agenda','📅','Nossa agenda','Compromissos, consultas e datas importantes.'],
+['financas','💰','Nossas finanças','Registrem entradas e despesas da casa.'],
+['compras','🛒','Lista de compras','Tudo que precisamos comprar.'],
+['tarefas','🏠','Tarefas da casa','Organizem o dia a dia juntos.'],
+['lua','🌙','Cantinho da Lua','Memórias, fotos e mêsversários da nossa filha.'],
+['fotos','📸','Recordações','Momentos especiais da nossa história.'],
+['metas','✨','Metas e sonhos','Planos para o nosso futuro.'],
+['cartas','💌','Cartas e mensagens','Palavras para guardar com carinho.'],
+['saude','🩺','Saúde e consultas','Lembretes de cuidados e consultas.'],
+['passeios','🌷','Passeios e lazer','Ideias para viver momentos juntos.'],
+['atividades','🔔','Atividades recentes','Veja quem adicionou registros ao nosso cantinho.']
+];
+
 const category=id=>id==='lua'?'diario_lua':id==='fotos'?'recordacoes':id;
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({
+  '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+}[c]));
+
 const fmtDate=s=>s?new Date(s).toLocaleString('pt-BR'):'';
-let current='home',member=null,items=[],loadCounter=0;
 const $=id=>document.getElementById(id);
-const start=new Date(2020,0,09),born=new Date(2026,0,28),now=new Date();
-$('together').textContent=Math.floor((new Date(now.getFullYear(),now.getMonth(),now.getDate())-start)/86400000).toLocaleString('pt-BR');
-$('luaAge').textContent=Math.max(0,(now.getFullYear()-born.getFullYear())*12+now.getMonth()-born.getMonth()-(now.getDate()<born.getDate()?1:0));
-$('tiles').innerHTML=pages.map(p=>`<button class="tile" onclick="go('${p[0]}')"><span>${p[1]}</span><b>${p[2]}</b></button>`).join('');
-function show(which){$('loading').classList.toggle('hidden',which!=='loading');$('auth').classList.toggle('hidden',which!=='auth');$('appContent').classList.toggle('hidden',which!=='app');$('bottomNav').classList.toggle('hidden',which!=='app')}
-async function checkSession(){if(!client){show('auth');$('loginError').textContent='Não foi possível carregar a conexão. Verifique a internet.';return}show('loading');try{const {data:{user},error}=await client.auth.getUser();if(error||!user){member=null;show('auth');return}const {data,error:memberError}=await client.from('family_members').select('display_name').eq('user_id',user.id).maybeSingle();if(memberError||!data){await client.auth.signOut();member=null;show('auth');$('loginError').textContent='Esta conta não está autorizada.';return}member=data;$('who').textContent=member.display_name;show('app');go('home')}catch(e){show('auth');$('loginError').textContent='Não foi possível conectar. Tente novamente.'}}
-$('loginForm').addEventListener('submit',async e=>{e.preventDefault();const form=e.currentTarget,btn=form.querySelector('button');btn.disabled=true;$('loginError').textContent='';try{if(!client)throw Error('Conexão indisponível');const {error}=await client.auth.signInWithPassword({email:form.elements.email.value.trim(),password:form.elements.password.value});if(error)throw error;form.elements.password.value='';await checkSession()}catch(e){$('loginError').textContent='Não foi possível entrar. Confira e-mail, senha e conexão.'}finally{btn.disabled=false}});
-$('logoutBtn').onclick=async()=>{await client.auth.signOut();member=null;items=[];show('auth')};
-function go(id){current=id;$('home').classList.toggle('hidden',id!=='home');$('detail').classList.toggle('hidden',id==='home');document.querySelectorAll('[data-nav]').forEach(b=>b.classList.toggle('active',b.dataset.nav===id));if(id!=='home')render();window.scrollTo(0,0)}
-function render(){const p=pages.find(x=>x[0]===current);if(!p)return;$('detailTitle').textContent=p[1]+' '+p[2];$('detailDesc').textContent=p[3];const fin=current==='financas',letter=current==='cartas',event=['agenda','saude','passeios'].includes(current),photo=['lua','fotos'].includes(current);
-$('detailBody').innerHTML=`${photo?'<div class="notice">📸 O envio de fotos ficará disponível após configurarmos o armazenamento privado no Cloudinary. Por enquanto, você pode guardar legendas e lembranças.</div>':''}<div class="panel"><form id="entryForm"><label>${letter?'Sua carta':photo?'Legenda da lembrança':fin?'Descrição':event?'Compromisso':'Novo registro'}</label>${letter?'<textarea class="field" name="title" required rows="4" maxlength="10000" placeholder="Escreva sua mensagem..."></textarea>':'<input class="field" name="title" required maxlength="250" placeholder="Escreva aqui...">'}${fin?'<select class="field" name="type"><option value="Despesa">Despesa</option><option value="Entrada">Entrada</option></select><input class="field" name="value" type="number" min="0" step="0.01" placeholder="Valor (R$)" required>':''}${event?'<input class="field" name="date" type="datetime-local" required>':''}${current==='lua'?'<input class="field" name="month" type="number" min="0" max="240" placeholder="Mêsversário (0 para nascimento)">':''}<button class="primary" type="submit">Guardar ♡</button><p id="saveError" class="error" role="alert"></p></form></div><div class="panel"><strong>${letter?'Cartas guardadas':'Nossos registros'}</strong><div id="entries">Carregando...</div></div>`;
-$('entryForm').onsubmit=submit;loadEntries()}
-async function loadEntries(){const token=++loadCounter,section=current;const {data,error}=await client.from('family_entries').select('id,title,created_at,event_at,amount,transaction_type,month_number,completed').eq('category',category(section)).order('created_at',{ascending:false}).limit(200);if(token!==loadCounter||current!==section)return;if(error){$('entries').textContent='Erro ao carregar registros: '+error.message;return}items=data||[];renderEntries()}
-function renderEntries(){const box=$('entries');if(!items.length){box.innerHTML='<div class="empty">Nosso primeiro registro começa aqui ♡</div>';return}box.innerHTML=items.map(x=>`<div class="entry"><small>${esc(fmtDate(x.created_at))}${x.event_at?' · '+esc(fmtDate(x.event_at)):''}${x.month_number!==null?' · '+esc(x.month_number)+'º mês':''}</small><p>${esc(x.title)}</p>${x.transaction_type?`<b>${esc(x.transaction_type)}: ${Number(x.amount).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</b>`:''}<div><button class="secondary" data-delete="${esc(x.id)}">Excluir</button></div></div>`).join('');box.querySelectorAll('[data-delete]').forEach(b=>b.onclick=()=>removeEntry(b.dataset.delete))}
-async function removeEntry(id){if(!confirm('Excluir este registro dos dois celulares?'))return;const {error}=await client.from('family_entries').delete().eq('id',id);if(error){alert('Não foi possível excluir: '+error.message);return}await loadEntries()}
-async function submit(e){e.preventDefault();const f=e.currentTarget,btn=f.querySelector('button'),d=new FormData(f),section=current;const title=String(d.get('title')||'').trim();if(!title)return;const record={category:category(section),title};if(d.get('date'))record.event_at=new Date(d.get('date')).toISOString();if(section==='financas'){record.amount=Number(d.get('value'));record.transaction_type=d.get('type')}if(section==='lua'&&d.get('month')!=='')record.month_number=Number(d.get('month'));btn.disabled=true;$('saveError').textContent='';const {error}=await client.from('family_entries').insert(record);btn.disabled=false;if(error){$('saveError').textContent='Não foi possível salvar: '+error.message;return}f.reset();await loadEntries()}
+
+let current='home';
+let member=null;
+let currentUser=null;
+let items=[];
+let loadCounter=0;
+
+function authorName(id){
+  if(!id)return 'Autor não identificado';
+  if(currentUser?.id===id)return member?.display_name||USERS[id]||'Você';
+  return USERS[id]||'Membro da família';
+}
+
+function authorHTML(id){
+  const name=authorName(id);
+  const initial=name.charAt(0).toUpperCase();
+  return `<div class="author">
+    <span class="avatar">${esc(initial)}</span>
+    <span>Adicionado por <strong>${esc(name)}</strong></span>
+  </div>`;
+}
+
+function updateCounters(){
+  const now=new Date();
+  const start=new Date(2020,0,9);
+  const born=new Date(2026,0,28);
+  const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  $('together').textContent=Math.floor((today-start)/86400000).toLocaleString('pt-BR');
+  $('luaAge').textContent=Math.max(0,
+    (now.getFullYear()-born.getFullYear())*12+
+    now.getMonth()-born.getMonth()-
+    (now.getDate()<born.getDate()?1:0)
+  );
+}
+
+$('tiles').innerHTML=pages.map(p=>
+  `<button class="tile" data-page="${p[0]}">
+    <span>${p[1]}</span><b>${p[2]}</b>
+  </button>`
+).join('');
+
+$('tiles').addEventListener('click',e=>{
+  const btn=e.target.closest('[data-page]');
+  if(btn)go(btn.dataset.page);
+});
+
+document.querySelectorAll('[data-nav]').forEach(btn=>{
+  btn.addEventListener('click',()=>go(btn.dataset.nav));
+});
+
+$('backBtn').onclick=()=>go('home');
+$('bellBtn').onclick=()=>go('atividades');
+
+function show(which){
+  $('loading').classList.toggle('hidden',which!=='loading');
+  $('auth').classList.toggle('hidden',which!=='auth');
+  $('appContent').classList.toggle('hidden',which!=='app');
+  $('bottomNav').classList.toggle('hidden',which!=='app');
+}
+
+async function checkSession(){
+  if(!client){
+    show('auth');
+    $('loginError').textContent='Não foi possível carregar a conexão. Verifique a internet.';
+    return;
+  }
+
+  show('loading');
+
+  try{
+    const {data:{user},error}=await client.auth.getUser();
+
+    if(error||!user){
+      member=null;
+      currentUser=null;
+      show('auth');
+      return;
+    }
+
+    const {data,error:memberError}=await client
+      .from('family_members')
+      .select('display_name')
+      .eq('user_id',user.id)
+      .maybeSingle();
+
+    if(memberError||!data){
+      await client.auth.signOut();
+      member=null;
+      currentUser=null;
+      show('auth');
+      $('loginError').textContent='Esta conta não está autorizada.';
+      return;
+    }
+
+    member=data;
+    currentUser=user;
+    $('who').textContent=member.display_name;
+    show('app');
+    updateCounters();
+    go('home');
+  }catch(e){
+    show('auth');
+    $('loginError').textContent='Não foi possível conectar. Tente novamente.';
+  }
+}
+
+$('loginForm').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const form=e.currentTarget;
+  const btn=form.querySelector('button');
+  btn.disabled=true;
+  $('loginError').textContent='';
+
+  try{
+    if(!client)throw Error('Conexão indisponível');
+
+    const {error}=await client.auth.signInWithPassword({
+      email:form.elements.email.value.trim(),
+      password:form.elements.password.value
+    });
+
+    if(error)throw error;
+    form.elements.password.value='';
+    await checkSession();
+  }catch(e){
+    $('loginError').textContent='Não foi possível entrar. Confira e-mail, senha e conexão.';
+  }finally{
+    btn.disabled=false;
+  }
+});
+
+$('logoutBtn').onclick=async()=>{
+  await client.auth.signOut();
+  member=null;
+  currentUser=null;
+  items=[];
+  ++loadCounter;
+  show('auth');
+};
+
+function go(id){
+  current=id;
+  ++loadCounter;
+
+  $('home').classList.toggle('hidden',id!=='home');
+  $('detail').classList.toggle('hidden',id==='home');
+
+  document.querySelectorAll('[data-nav]').forEach(btn=>{
+    btn.classList.toggle('active',btn.dataset.nav===id);
+  });
+
+  if(id!=='home')render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  const p=pages.find(x=>x[0]===current);
+  if(!p)return;
+
+  $('detailTitle').textContent=p[1]+' '+p[2];
+  $('detailDesc').textContent=p[3];
+
+  if(current==='atividades'){
+    $('detailBody').innerHTML=`
+      <div class="panel">
+        <strong>Movimentações da família ♡</strong>
+        <p class="muted">Registros recentes de Harri e Carol. Esta área não envia notificações push.</p>
+        <div class="sectionActions">
+          <button class="secondary" id="refreshActivities">↻ Atualizar</button>
+        </div>
+        <div id="entries">Carregando...</div>
+      </div>`;
+    $('refreshActivities').onclick=loadActivities;
+    loadActivities();
+    return;
+  }
+
+  const fin=current==='financas';
+  const letter=current==='cartas';
+  const event=['agenda','saude','passeios'].includes(current);
+  const photo=['lua','fotos'].includes(current);
+
+  $('detailBody').innerHTML=`
+    ${photo?'<div class="notice">📸 O envio de fotos ficará disponível após concluirmos o armazenamento e a visualização privada no Cloudinary. Por enquanto, você pode guardar legendas e lembranças.</div>':''}
+    <div class="panel">
+      <form id="entryForm">
+        <label>${letter?'Sua carta':photo?'Legenda da lembrança':fin?'Descrição':event?'Compromisso':'Novo registro'}</label>
+        ${letter?
+          '<textarea class="field" name="title" required rows="4" maxlength="10000" placeholder="Escreva sua mensagem..."></textarea>':
+          '<input class="field" name="title" required maxlength="250" placeholder="Escreva aqui...">'
+        }
+        ${fin?`
+          <select class="field" name="type">
+            <option value="Despesa">Despesa</option>
+            <option value="Entrada">Entrada</option>
+          </select>
+          <input class="field" name="value" type="number" min="0" step="0.01" placeholder="Valor (R$)" required>
+        `:''}
+        ${event?'<input class="field" name="date" type="datetime-local" required>':''}
+        ${current==='lua'?'<input class="field" name="month" type="number" min="0" max="240" placeholder="Mêsversário (0 para nascimento)">':''}
+        <button class="primary" type="submit">Guardar ♡</button>
+        <p id="saveError" class="error" role="alert"></p>
+      </form>
+    </div>
+    <div class="panel">
+      <strong>${letter?'Cartas guardadas':'Nossos registros'}</strong>
+      <div class="sectionActions">
+        <button class="secondary" id="refreshEntries">↻ Atualizar</button>
+      </div>
+      <div id="entries">Carregando...</div>
+    </div>`;
+
+  $('entryForm').onsubmit=submit;
+  $('refreshEntries').onclick=loadEntries;
+  loadEntries();
+}
+
+async function loadEntries(){
+  const token=++loadCounter;
+  const section=current;
+
+  const {data,error}=await client
+    .from('family_entries')
+    .select('id,title,created_at,created_by,event_at,amount,transaction_type,month_number,completed')
+    .eq('category',category(section))
+    .order('created_at',{ascending:false})
+    .limit(200);
+
+  if(token!==loadCounter||current!==section)return;
+
+  if(error){
+    $('entries').textContent='Erro ao carregar registros: '+error.message;
+    return;
+  }
+
+  items=data||[];
+  renderEntries();
+}
+
+function renderEntries(){
+  const box=$('entries');
+
+  if(!items.length){
+    box.innerHTML='<div class="empty">Nosso primeiro registro começa aqui ♡</div>';
+    return;
+  }
+
+  box.innerHTML=items.map(x=>`
+    <div class="entry">
+      <small>
+        ${esc(fmtDate(x.created_at))}
+        ${x.event_at?' · '+esc(fmtDate(x.event_at)):''}
+        ${x.month_number!==null?' · '+esc(x.month_number)+'º mês':''}
+      </small>
+      ${authorHTML(x.created_by)}
+      <p>${esc(x.title)}</p>
+      ${x.transaction_type?`
+        <b>${esc(x.transaction_type)}:
+        ${Number(x.amount).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}</b>
+      `:''}
+      <div class="sectionActions">
+        <button class="secondary" data-delete="${esc(x.id)}">Excluir</button>
+      </div>
+    </div>
+  `).join('');
+
+  box.querySelectorAll('[data-delete]').forEach(btn=>{
+    btn.onclick=()=>removeEntry(btn.dataset.delete);
+  });
+}
+
+async function loadActivities(){
+  const token=++loadCounter;
+
+  const {data,error}=await client
+    .from('family_entries')
+    .select('id,title,category,created_at,created_by')
+    .order('created_at',{ascending:false})
+    .limit(30);
+
+  if(token!==loadCounter||current!=='atividades')return;
+
+  if(error){
+    $('entries').textContent='Não foi possível carregar as atividades: '+error.message;
+    return;
+  }
+
+  if(!data?.length){
+    $('entries').innerHTML='<div class="empty">Ainda não há atividades registradas ♡</div>';
+    return;
+  }
+
+  $('entries').innerHTML=data.map(x=>{
+    const page=pages.find(p=>category(p[0])===x.category);
+    const icon=page?.[1]||'💗';
+    const sectionName=page?.[2]||'Registro';
+
+    return `<div class="entry activity">
+      <span class="activityIcon">${icon}</span>
+      <div>
+        <strong>${esc(sectionName)}</strong>
+        <div>${authorHTML(x.created_by)}</div>
+        <p>${esc(x.title)}</p>
+        <small>${esc(fmtDate(x.created_at))}</small>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+async function removeEntry(id){
+  if(!confirm('Excluir este registro dos dois celulares?'))return;
+
+  const {error}=await client
+    .from('family_entries')
+    .delete()
+    .eq('id',id);
+
+  if(error){
+    alert('Não foi possível excluir: '+error.message);
+    return;
+  }
+
+  await loadEntries();
+}
+
+async function submit(e){
+  e.preventDefault();
+
+  const f=e.currentTarget;
+  const btn=f.querySelector('button[type="submit"]');
+  const d=new FormData(f);
+  const section=current;
+  const title=String(d.get('title')||'').trim();
+
+  if(!title)return;
+
+  const record={
+    category:category(section),
+    title
+  };
+
+  if(d.get('date')){
+    record.event_at=new Date(d.get('date')).toISOString();
+  }
+
+  if(section==='financas'){
+    record.amount=Number(d.get('value'));
+    record.transaction_type=d.get('type');
+  }
+
+  if(section==='lua'&&d.get('month')!==''){
+    record.month_number=Number(d.get('month'));
+  }
+
+  btn.disabled=true;
+  $('saveError').textContent='';
+
+  try{
+    const {error}=await client
+      .from('family_entries')
+      .insert(record);
+
+    if(error)throw error;
+
+    f.reset();
+    await loadEntries();
+  }catch(error){
+    $('saveError').textContent='Não foi possível salvar: '+error.message;
+  }finally{
+    btn.disabled=false;
+  }
+}
+
 checkSession();
-if('serviceWorker'in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));
-</script></body></html>
+
+if('serviceWorker'in navigator){
+  window.addEventListener('load',()=>{
+    navigator.serviceWorker.register('./sw.js').catch(()=>{});
+  });
+}
+</script>
+</body>
+</html>
