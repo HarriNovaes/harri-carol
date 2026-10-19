@@ -161,7 +161,8 @@ const pages=[
 ['cartas','💌','Cartas e mensagens','Palavras para guardar com carinho.'],
 ['saude','🩺','Saúde e consultas','Lembretes de cuidados e consultas.'],
 ['passeios','🌷','Passeios e lazer','Ideias para viver momentos juntos.'],
-['atividades','🔔','Atividades recentes','Veja quem adicionou registros ao nosso cantinho.']
+['atividades','🔔','Atividades recentes','Veja quem adicionou registros ao nosso cantinho.'],
+['teste-upload','🧪','Teste de fotos','Teste técnico de envio seguro ao Cloudinary.']
 ];
 
 const category=id=>id==='lua'?'diario_lua':id==='fotos'?'recordacoes':id;
@@ -333,6 +334,21 @@ function render(){
   $('detailTitle').textContent=p[1]+' '+p[2];
   $('detailDesc').textContent=p[3];
 
+  if(current==='teste-upload'){
+    $('detailBody').innerHTML=`
+      <div class="notice">🧪 Teste temporário. Escolha somente uma imagem sem pessoas, documentos ou informações pessoais. O teste enviará a imagem para a pasta de recordações do casal no Cloudinary como arquivo autenticado. Não exibiremos nem compartilharemos a URL.</div>
+      <div class="panel">
+        <form id="uploadTestForm">
+          <label for="uploadTestFile">Imagem de teste (JPG, PNG ou WebP, até 10 MB)</label>
+          <input id="uploadTestFile" class="field" name="file" type="file" accept="image/jpeg,image/png,image/webp" required>
+          <button class="primary" type="submit">Testar envio protegido</button>
+          <p id="uploadTestResult" class="muted" role="status" aria-live="polite"></p>
+        </form>
+      </div>`;
+    $('uploadTestForm').onsubmit=testCloudinaryUpload;
+    return;
+  }
+
   if(current==='atividades'){
     $('detailBody').innerHTML=`
       <div class="panel">
@@ -386,6 +402,44 @@ function render(){
   $('entryForm').onsubmit=submit;
   $('refreshEntries').onclick=loadEntries;
   loadEntries();
+}
+
+async function testCloudinaryUpload(e){
+  e.preventDefault();
+  const form=e.currentTarget;
+  const button=form.querySelector('button[type="submit"]');
+  const result=$('uploadTestResult');
+  const file=form.elements.file.files?.[0];
+  if(!file)return;
+  if(!['image/jpeg','image/png','image/webp'].includes(file.type)||file.size>10*1024*1024){
+    result.textContent='Escolha uma imagem JPG, PNG ou WebP com até 10 MB.';
+    return;
+  }
+  button.disabled=true;
+  result.textContent='Verificando sessão e enviando imagem de teste...';
+  try{
+    const {data:{session},error:sessionError}=await client.auth.getSession();
+    if(sessionError||!session?.access_token)throw new Error('Sessão expirada. Entre novamente no aplicativo.');
+    const formData=new FormData();
+    formData.append('file',file);
+    formData.append('category','casal');
+    const response=await fetch(PROJECT_URL+'/functions/v1/quick-worker',{
+      method:'POST',
+      headers:{
+        'Authorization':'Bearer '+session.access_token,
+        'apikey':PUBLISHABLE_KEY
+      },
+      body:formData
+    });
+    const payload=await response.json().catch(()=>({}));
+    if(!response.ok)throw new Error('HTTP '+response.status+' — '+(payload.error||'Falha no envio'));
+    if(!payload.asset_id||!payload.public_id)throw new Error('Resposta inesperada do servidor.');
+    result.textContent='✅ Upload autenticado concluído! Arquivo de teste salvo no Cloudinary. ID: '+payload.asset_id+'. Ainda falta implementar a visualização privada.';
+  }catch(err){
+    result.textContent='❌ '+(err?.message||'Falha na conexão.');
+  }finally{
+    button.disabled=false;
+  }
 }
 
 async function loadEntries(){
